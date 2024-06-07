@@ -1,0 +1,16 @@
+.profile-wrap {
+    display: flex;
+    gap: 30px;
+}
+.profile-card    {
+    width: 100px;
+    height: 100px;
+}
+.profile-card img {
+    width: 100px;
+    height: 100px;
+}
+.profile-card p {
+    font-size: small;
+    text-align: center;
+}

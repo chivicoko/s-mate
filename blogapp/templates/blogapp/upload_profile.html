@@ -5,13 +5,13 @@
 
 {% block content %}
 
-<h1>Post Blog</h1>
-<div class="row py-4 "> 
+    <h1>Upload Profile</h1>
+    <div class="row py-4 "> 
         <div class="col">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-success px-4">Post</button>
+                <button type="submit" class="btn btn-success px-4">Upload</button>
             </form>
         </div>
     </div>

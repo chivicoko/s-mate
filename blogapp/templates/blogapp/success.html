@@ -1,0 +1,17 @@
+
+{% extends "main.html" %}
+
+{% block title %}{{ post.title }} - TheBlog{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col">
+            <h1>Successfully Uploaded / Posted!!!</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsam explicabo accusamus recusandae praesentium aperiam?</p>
+        </div>
+    </div>
+
+    <a href="{% url 'frontpage' %}" class="btn btn-secondary px-4 my-3">Back</a>
+    
+{% endblock %}

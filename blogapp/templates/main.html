@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <!-- Navbar -->
@@ -27,13 +28,13 @@
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
                     <li class="nav-item ml-4">
                         <a href="{% url 'post_blog' %}" class="btn btn-primary px-4">Post</a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a href="{% url 'upload_profile' %}" class="btn btn-primary px-4">Upload Profile</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +55,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
-        <p>&copy; 2024 theblog. All rights reserved.</p>
+        <p>&copy; 2024 <strong>TheBlog</strong>. All rights reserved.</p>
     </footer>
 
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

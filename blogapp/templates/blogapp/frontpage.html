@@ -3,23 +3,41 @@
 {% block title %}Frontpage - TheBlog{% endblock %}
 
 {% block content %}
-    <h3>Blogs</h3>
     
-    <div class="row">
-        {% for post in posts %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    {% if post.thumbnail %}
-                        <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.body }}</p>
-                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
-                    </div>
+    <div class="row profile-wrap mb-4">
+        {% for profile in profiles %}
+            <div class="">
+                <div class="profile-card border mb-4 rounded-circle">
+                    <img src="{{ profile.avatar.url }}" class="card-img-top rounded-circle" alt="Thumbnail for {{ profile.name }}">
+                    <p class="mb-1">{{ profile.name }}</p>
                 </div>
             </div>
         {% endfor %}
+    </div>
+
+
+    <h3>Blogs</h3>
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                {% for post in posts %}
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            {% if post.thumbnail %}
+                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.body }}</p>
+                                <a href="{% url 'post_detail' post.slug %}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+            
+        {% include "sidebar.html" %}
     </div>
     
 {% endblock %}

@@ -5,14 +5,15 @@ from .models import Profile, Post
 
 def frontpage(request):
     posts = Post.objects.all()
-    return render(request, 'blogapp/frontpage.html', {'posts': posts})
+    profiles = Profile.objects.all()
+    return render(request, 'blogapp/frontpage.html', {'posts': posts, 'profiles': profiles})
 
 def post_blog(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('success')
     else:
         form = PostForm()
     return render(request, 'blogapp/post.html', {'form': form})
@@ -26,10 +27,10 @@ def upload_profile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('profile_success')
+            return redirect('success')
     else:
         form = ProfileForm()
-    return render(request, 'blogapp/upload.html', {'form': form})
+    return render(request, 'blogapp/upload_profile.html', {'form': form})
 
-def profile_success(request):
-    return render(request, 'blogapp/profile_success.html')
+def success(request):
+    return render(request, 'blogapp/success.html')
