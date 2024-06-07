@@ -1,3 +1,7 @@
+.main-wrap {
+    min-height: 55vh;
+}
+
 .profile-wrap {
     display: flex;
     gap: 30px;
@@ -9,6 +13,7 @@
 .profile-card img {
     width: 100px;
     height: 100px;
+    object-fit: cover;
 }
 .profile-card p {
     font-size: small;

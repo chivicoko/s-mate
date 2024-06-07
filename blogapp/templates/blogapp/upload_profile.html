@@ -10,8 +10,18 @@
         <div class="col">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-success px-4">Upload</button>
+                <!-- {{ form.as_p }} -->
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form.title.label_tag }}
+                        {{ form.name }}
+                    </div>
+                    <div class="col">
+                        {{ form.slug.label_tag }}
+                        {{ form.avatar }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
             </form>
         </div>
     </div>

@@ -5,13 +5,39 @@
 
 {% block content %}
 
-<h1>Post Blog</h1>
+<h1>Create New Post</h1>
 <div class="row py-4 "> 
         <div class="col">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-success px-4">Post</button>
+                <!-- {{ form.as_p }} -->
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                    </div>
+                    <div class="col">
+                        {{ form.slug.label_tag }}
+                        {{ form.slug }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form.intro.label_tag }}
+                        {{ form.intro }}
+                    </div>
+                    <div class="col">
+                        {{ form.thumbnail.label_tag }}
+                        {{ form.thumbnail }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.body.label_tag }}
+                        {{ form.body }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
             </form>
         </div>
     </div>
