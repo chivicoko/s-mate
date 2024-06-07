@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -17,6 +18,11 @@ class Post(models.Model):
 class Profile(models.Model):
     name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to='avatars/')
+    created_at = models.DateTimeField(auto_now_add=True, )
+    # created_at = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ('-created_at',)
