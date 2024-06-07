@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ProfileForm
+from .forms import ProfileForm, PostForm
 from .models import Profile, Post
 
 
@@ -9,16 +9,17 @@ def frontpage(request):
 
 def post_blog(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
-        form = ProfileForm()
+        form = PostForm()
     return render(request, 'blogapp/post.html', {'form': form})
 
 def post_detail(request, slug):
-    return render(request, 'blogapp/post_detail.html')
+    post = Post.objects.get(slug=slug)
+    return render(request, 'blogapp/post_detail.html', {'post':post})
 
 def upload_profile(request):
     if request.method == 'POST':

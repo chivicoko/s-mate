@@ -1,18 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is the frontpage!</h1>
+{% extends "main.html" %}
 
-    {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <img src="{{ post.thumbnail.url }}" alt="Thumbnail for {{ post.title }}">
-        <p>{{ post.body }}</p>
-    {% endfor %}
-    <a href="{% url 'post_blog' %}">Post Again</a>
-</body>
-</html>
+{% block title %}Frontpage - TheBlog{% endblock %}
+
+{% block content %}
+    <h3>Blogs</h3>
+    
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    {% if post.thumbnail %}
+                        <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.body }}</p>
+                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

@@ -1,11 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is the post details page!</h1>
-</body>
-</html>
+{% extends "main.html" %}
+
+{% block title %}{{ post.title }} - TheBlog{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-4">
+                {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% include "sidebar.html" %}
+
+    </div>
+
+    <a href="{% url 'frontpage' %}" class="btn btn-secondary px-4">Back</a>
+    
+{% endblock %}
