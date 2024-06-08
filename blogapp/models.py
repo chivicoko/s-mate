@@ -17,13 +17,11 @@ class Post(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/default_avatar.png', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, )
-    # created_at = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
-        return self.name
+        return self.user.username
     
     class Meta:
         ordering = ('-created_at',)

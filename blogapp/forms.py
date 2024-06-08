@@ -1,23 +1,8 @@
 from django import forms
-from .models import Profile, Post
+from .models import Post
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-
-
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['name', 'avatar']
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter your name'
-            }),
-            'avatar': forms.ClearableFileInput(attrs={
-                'class': 'form-control-file'
-            }),
-        }
 
 
 class PostForm(forms.ModelForm):

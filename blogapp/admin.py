@@ -3,9 +3,9 @@ from .models import Post, Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'avatar')
-    search_fields = ('name',)
-    list_filter = ('name',)
+    list_display = ('user', 'avatar')
+    search_fields = ('user',)
+    list_filter = ('user',)
 
 
 class PostAdmin(admin.ModelAdmin):
