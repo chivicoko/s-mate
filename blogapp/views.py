@@ -45,7 +45,7 @@ def frontpage(request):
     posts = Post.objects.all()
     return render(request, 'blogapp/frontpage.html', {'posts': posts})
 
-@login_required
+# @login_required
 def post_blog(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
