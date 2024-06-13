@@ -1,31 +1,16 @@
 {% extends "main.html" %}
 
-{% block title %}Frontpage - TheBlog{% endblock %}
+{% block title %}SchoolMate - Your Educational Friend.{% endblock %}
 
 {% block content %}
 
-    <h3>Blogs</h3>
     <div class="row">
-        <div class="col-8">
-            <div class="row">
-                {% for post in posts %}
-                    <div class="col-md-6">
-                        <div class="card mb-4">
-                            {% if post.thumbnail %}
-                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <p class="card-text">{{ post.body }}</p>
-                                <a href="{% url 'post_detail' post.slug %}">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+        <div class="col text-center">
+            <h3>This is the home page</h3>
             
-        {% include "sidebar.html" %}
+            <a href="{% url 'teacher' %}" class="btn btn-primary px-4">Teacher</a>
+            <a href="{% url 'student' %}" class="btn btn-outline-primary px-4">Student</a>
+        </div>
     </div>
     
 {% endblock %}

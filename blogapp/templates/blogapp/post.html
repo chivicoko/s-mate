@@ -3,30 +3,37 @@
 
 {% block title %}{{ post.title }} - TheBlog{% endblock %}
 
+<!-- Header -->
+{% block header %}
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Create New Post</h1>
+        <p class="lead">Here you can convert your thoughts into reality by putting them down in writing.</p>
+    </header>
+{% endblock header %}
+
 {% block content %}
 
-<h1>Create New Post</h1>
 <div class="row py-4 "> 
         <div class="col">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- {{ form.as_p }} -->
                 <div class="row mb-3">
-                    <div class="col">
+                    <div class="col-md-6">
                         {{ form.title.label_tag }}
                         {{ form.title }}
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         {{ form.slug.label_tag }}
                         {{ form.slug }}
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col">
+                    <div class="col-md-6">
                         {{ form.intro.label_tag }}
                         {{ form.intro }}
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         {{ form.thumbnail.label_tag }}
                         {{ form.thumbnail }}
                     </div>

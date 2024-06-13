@@ -45,7 +45,22 @@ def frontpage(request):
     posts = Post.objects.all()
     return render(request, 'blogapp/frontpage.html', {'posts': posts})
 
+@login_required
+def teacher(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/teacher.html', {'posts': posts})
+
+@login_required
+def student(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/student.html', {'posts': posts})
+
 # @login_required
+def blog(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/blog.html', {'posts': posts})
+
+@login_required
 def post_blog(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -58,9 +73,11 @@ def post_blog(request):
         form = PostForm()
     return render(request, 'blogapp/post.html', {'form': form})
 
+@login_required
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, 'blogapp/post_detail.html', {'post': post})
 
+@login_required
 def success(request):
     return render(request, 'blogapp/success.html')
