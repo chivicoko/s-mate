@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block title %}SchoolMate - Your Educational Friend.{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col text-center">
+            <h3>Page for Adding Tests</h3>
+            <a href="{% url 'teacher_add_question' %}" class="btn btn-outline-primary px-4">Add Questions</a>
+        </div>
+    </div>
+    
+{% endblock %}

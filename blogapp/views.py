@@ -51,9 +51,29 @@ def teacher(request):
     return render(request, 'blogapp/teacher.html', {'posts': posts})
 
 @login_required
+def teacher_add_question(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/add_question.html', {'posts': posts})
+
+@login_required
+def teacher_add_test(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/add_test.html', {'posts': posts})
+
+@login_required
 def student(request):
     posts = Post.objects.all()
     return render(request, 'blogapp/student.html', {'posts': posts})
+
+@login_required
+def student_past_questions(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/past_questions.html', {'posts': posts})
+
+@login_required
+def student_subjects(request):
+    posts = Post.objects.all()
+    return render(request, 'blogapp/subjects.html', {'posts': posts})
 
 # @login_required
 def blog(request):
