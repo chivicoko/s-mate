@@ -12,7 +12,7 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('frontpage')
+            return redirect('home')
         else:
             messages.error(request, 'Registration failed. Please correct the errors below.')
     else:
@@ -28,7 +28,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('frontpage')
+                return redirect('home')
             else:
                 messages.error(request, 'Invalid username or password.')
         else:
@@ -39,11 +39,11 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('frontpage')
+    return redirect('home')
 
-def frontpage(request):
+def home(request):
     posts = Post.objects.all()
-    return render(request, 'blogapp/frontpage.html', {'posts': posts})
+    return render(request, 'blogapp/home.html', {'posts': posts})
 
 @login_required
 def teacher(request):

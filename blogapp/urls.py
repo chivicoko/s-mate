@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import frontpage, teacher, teacher_add_question, teacher_add_test, student, student_past_questions, student_subjects, blog, post_detail, success, post_blog, register_view, login_view, logout_view
+from .views import home, teacher, teacher_add_question, teacher_add_test, student, student_past_questions, student_subjects, blog, post_detail, success, post_blog, register_view, login_view, logout_view
 
 urlpatterns = [
-    path('', frontpage, name='frontpage'),
+    path('', home, name='home'),
     path('teacher/', teacher, name='teacher'),
     path('teacher/teacher_add_question/', teacher_add_question, name='teacher_add_question'),
     path('teacher/teacher_add_test/', teacher_add_test, name='teacher_add_test'),
