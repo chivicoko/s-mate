@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm, RegisterForm, CustomAuthenticationForm
 from .models import Post
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+from django.contrib.auth.models import User, Group
 
 def register_view(request):
     if request.method == 'POST':
@@ -80,13 +81,32 @@ def blog(request):
     
     if request.method == "POST":
         post_id = request.POST.get('post-id')
-        post = Post.objects.filter(id=post_id).first()
-        if post and post.author == request.user:
-            post.delete()
+        user_id = request.POST.get('user-id')
+
+        if post_id:
+            post = Post.objects.filter(id=post_id).first()
+            if post and (post.author == request.user or request.user.has_perm("blogapp.delete_post")):
+                post.delete()
+        elif user_id:
+            user = User.objects.filter(id=user_id).first()
+            if user and request.user.is_staff:
+                try:
+                    group = Group.objects.get(name='default')
+                    group.user_set.remove(user)
+                except:
+                    pass
+
+                try:
+                    group = Group.objects.get(name='mod')
+                    group.user_set.remove(user)
+                except:
+                    pass
+
         
     return render(request, 'blogapp/blog.html', {'posts': posts})
 
 @login_required
+@permission_required("blogapp.add_post", login_url="login", raise_exception=True)
 def post_blog(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
