@@ -11,8 +11,9 @@
 </head>
 <body>
     <!-- Navbar -->
+    {% block navigation %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}"><strong>SchoolMate</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -20,9 +21,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     {% if user.is_authenticated %}
-                    <li class="nav-item ms-4">
-                        <a href="{% url 'post_blog' %}" class="btn btn-primary px-4">New Post</a>
-                    </li>
                     <li class="nav-item dropdown ms-4">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="Profile" width="30" height="30">
@@ -51,6 +49,7 @@
             </div>
         </div>
     </nav>
+    {% endblock %}
 
     <!-- Header -->
     <div class="container-fluid bg-dark header-container">

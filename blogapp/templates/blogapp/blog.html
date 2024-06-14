@@ -2,6 +2,51 @@
 
 {% block title %}Frontpage - TheBlog{% endblock %}
 
+
+    <!-- Navbar -->
+    {% block navigation %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}"><strong>SchoolMate</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item ms-4">
+                        <a href="{% url 'post_blog' %}" class="btn btn-primary px-4">New Post</a>
+                    </li>
+                    <li class="nav-item dropdown ms-4">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="Profile" width="30" height="30">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#"><em>Hello <strong>{{user.username|capfirst}}</strong></em></a></li>
+                            <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'teacher' %}">Teacher</a></li>
+                            <li><a class="dropdown-item" href="{% url 'student' %}">Student</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ms-4">
+                        <a href="{% url 'login' %}" class="btn btn-outline-primary px-4">Login</a>
+                    </li>
+                    <li class="nav-item ms-4">
+                        <a href="{% url 'register' %}" class="btn btn-outline-primary px-4">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+
 <!-- Header -->
 {% block header %}
     <header class="bg-primary text-white text-center py-3">
