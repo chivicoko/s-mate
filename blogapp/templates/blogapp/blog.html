@@ -22,22 +22,37 @@
                                 <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
                             {% endif %}
                             <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
+                                <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
                                 <p class="card-text">{{ post.body }}</p>
                                 <div class="row">
                                     <div class="col">
                                         <a href="{% url 'post_detail' post.slug %}">Read More</a>
                                     </div>
-                                    <!-- <div class="col">
-                                        <p><small>{{ user }}</small></p>
-                                    </div> -->
                                     <div class="col">
                                         <p><small>{{ post.created_at }}</small></p>
                                     </div>
                                 </div>
+                                <div class="row justify-content-between">
+                                    {% if user == post.author %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                    <!-- <div class="col-4">
+                                        <button type="submit" class="btn btn-outline-warning">Ban User</button>    
+                                    </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                {% empty %}
+
+                    <p>No posts yet <em>!</em> </p>
+
                 {% endfor %}
             </div>
         </div>

@@ -77,6 +77,13 @@ def student_subjects(request):
 # @login_required
 def blog(request):
     posts = Post.objects.all()
+    
+    if request.method == "POST":
+        post_id = request.POST.get('post-id')
+        post = Post.objects.filter(id=post_id).first()
+        if post and post.author == request.user:
+            post.delete()
+        
     return render(request, 'blogapp/blog.html', {'posts': posts})
 
 @login_required
@@ -84,7 +91,9 @@ def post_blog(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('success')
         else:
             messages.error(request, 'Failed to create post. Please correct the errors below.')
