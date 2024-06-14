@@ -53,12 +53,14 @@
     </nav>
 
     <!-- Header -->
-    {% block header %}
+    <div class="container-fluid bg-dark header-container">
+        {% block header %}
         <header class="bg-primary text-white text-center py-3">
             <h1>Welcome to SchoolMate</h1>
             <p class="lead">A great place to find amazing content</p>
         </header>
-    {% endblock header %}
+        {% endblock header %}
+    </div>
 
     {% if messages %}
         <div class="container mt-3">

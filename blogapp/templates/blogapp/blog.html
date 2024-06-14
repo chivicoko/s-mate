@@ -24,7 +24,17 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ post.title }}</h5>
                                 <p class="card-text">{{ post.body }}</p>
-                                <a href="{% url 'post_detail' post.slug %}">Read More</a>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
+                                    </div>
+                                    <!-- <div class="col">
+                                        <p><small>{{ user }}</small></p>
+                                    </div> -->
+                                    <div class="col">
+                                        <p><small>{{ post.created_at }}</small></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

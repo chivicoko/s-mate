@@ -13,8 +13,8 @@
 
 {% block content %}
 
-<div class="row py-4 "> 
-        <div class="col">
+<div class="row py-4 justify-content-center"> 
+        <div class="col-md-10">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- {{ form.as_p }} -->
@@ -44,11 +44,11 @@
                         {{ form.body }}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                <button type="submit" class="btn btn-primary mt-3 form-control">Submit</button>
             </form>
+            <a href="{% url 'home' %}" class="btn btn-secondary mt-3 form-control">Home</a>
         </div>
     </div>
 
-    <a href="{% url 'home' %}" class="btn btn-secondary px-4">Home</a>
     
 {% endblock %}

@@ -3,6 +3,7 @@ from .views import home, teacher, teacher_add_question, teacher_add_test, studen
 
 urlpatterns = [
     path('', home, name='home'),
+    path('home/', home, name='home'),
     path('teacher/', teacher, name='teacher'),
     path('teacher/teacher_add_question/', teacher_add_question, name='teacher_add_question'),
     path('teacher/teacher_add_test/', teacher_add_test, name='teacher_add_test'),
