@@ -1,0 +1,219 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+db.sqlite3-journal
+
+# Django media files #
+media/
+
+# Django static files #
+staticfiles/
+static/
+
+# If you're using Django Compressor #
+compressed/
+
+# Environments #
+.env
+.env.*
+.vscode/
+.idea/
+
+# macOS #
+.DS_Store
+
+# PyCharm #
+*.idea/
+
+# VS Code #
+.vscode/
+
+# Python #
+*.py[cod]
+*.py[cod].*
+*$py.class
+
+# Distribution / packaging #
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs #
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports #
+.coverage
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations #
+*.mo
+*.pot
+
+# Django stuff:
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation:
+docs/_build/
+
+# PyBuilder:
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+# Pycharm
+.idea/
+*.iml
+
+# IntelliJ
+*.ipr
+*.iws
+
+# Rider
+.idea/
+*.sln
+*.csproj
+*.pidb
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# venv
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Anaconda
+.env
+.conda
+.condarc
+.conda-env
+*.conda
+*.ipynb_checkpoints
+
+# Pytest
+.pytest_cache/
+__pycache__
+.pyc
+
+# Coverage reports
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# celery
+celerybeat-schedule
+
+# translations
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# Pytest
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+.hypothesis/
+.pytest_cache/
+*.cover
+.cache
+
+# Unit test / coverage reports #
+.coverage
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# VS Code #
+.vscode/
+
+# Sphinx documentation
+docs/_build/
+
+# mkdocs documentation
+/site
+
+# PyBuilder
+target/
