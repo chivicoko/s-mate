@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Question
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'thumbnail', 'intro', 'body']
+        fields = ['title', 'slug', 'thumbnail', 'intro', 'body', 'status']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -30,6 +30,33 @@ class PostForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 10,
                 'placeholder': 'Enter the full content'
+            }),
+            'status': forms.Select(attrs={
+                'class': 'form-control'
+            }),
+        }
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['question', 'answer', 'thumbnail', 'status']
+        widgets = {
+            'question': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter a question'
+            }),
+            'answer': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter the answer to the question'
+            }),
+            'thumbnail': forms.ClearableFileInput(attrs={
+                'class': 'form-control-file'
+            }),
+            'status': forms.Select(attrs={
+                'class': 'form-control'
             }),
         }
 

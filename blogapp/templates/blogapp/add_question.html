@@ -1,13 +1,52 @@
+
 {% extends "main.html" %}
 
-{% block title %}SchoolMate - Your Educational Friend.{% endblock %}
+{% block title %}SchoolMate | Teacher - Add New Question{% endblock %}
+
+<!-- Header -->
+{% block header %}
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Add Question</h1>
+        <p class="lead">Here you can add all your questions, and choose to publish immediately or not.</p>
+    </header>
+{% endblock header %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="col text-center">
-            <h3>Page for Adding Questions</h3>
-            <a href="{% url 'teacher_add_test' %}" class="btn btn-outline-primary px-4">Add Test</a>
+<div class="row py-4 justify-content-center"> 
+        <div class="col-md-10">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.question.label_tag }}
+                        {{ form.question }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.answer.label_tag }}
+                        {{ form.answer }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.thumbnail.label_tag }}
+                        {{ form.thumbnail }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.status.label_tag }}
+                        {{ form.status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary mt-3 form-control">Submit</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'add_test' %}" class="btn btn-outline-primary px-4 mt-3 form-control">Add Test</a>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'home' %}" class="btn btn-secondary mt-3 form-control">Home</a>
         </div>
     </div>
     

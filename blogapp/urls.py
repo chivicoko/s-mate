@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import home, teacher, teacher_add_question, teacher_add_test, student, student_past_questions, student_subjects, blog, post_detail, success, new_blog_post, register_view, login_view, logout_view
+from .views import home, teacher, new_question, add_test, student, student_past_questions, student_subjects, blog, post_detail, success, new_blog_post, register_view, login_view, logout_view
 
 urlpatterns = [
     path('', home, name='home'),
     path('home/', home, name='home'),
     path('teacher/', teacher, name='teacher'),
-    path('teacher/teacher_add_question/', teacher_add_question, name='teacher_add_question'),
-    path('teacher/teacher_add_test/', teacher_add_test, name='teacher_add_test'),
+    path('teacher/new_question/', new_question, name='new_question'),
+    path('teacher/add_test/', add_test, name='add_test'),
     path('student/', student, name='student'),
     path('student/student_past_questions', student_past_questions, name='student_past_questions'),
     path('student/student_subjects', student_subjects, name='student_subjects'),

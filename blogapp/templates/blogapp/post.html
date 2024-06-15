@@ -1,7 +1,7 @@
 
 {% extends "main.html" %}
 
-{% block title %}{{ post.title }} - TheBlog{% endblock %}
+{% block title %}SchoolMate | TheBlog - New Post{% endblock %}
 
 <!-- Header -->
 {% block header %}
@@ -17,7 +17,6 @@
         <div class="col-md-10">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <!-- {{ form.as_p }} -->
                 <div class="row mb-3">
                     <div class="col-md-6">
                         {{ form.title.label_tag }}
@@ -33,9 +32,13 @@
                         {{ form.intro.label_tag }}
                         {{ form.intro }}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         {{ form.thumbnail.label_tag }}
                         {{ form.thumbnail }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.status.label_tag }}
+                        {{ form.status }}
                     </div>
                 </div>
                 <div class="row">

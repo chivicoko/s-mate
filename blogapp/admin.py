@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Profile
+from .models import Post, Profile, Question
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -9,10 +9,17 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'created_at')
+    list_display = ('title', 'status', 'author', 'created_at')
     search_fields = ('title', 'created_at')
-    list_filter = ('title', 'created_at')
+    list_filter = ('title', 'status', 'created_at')
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('question', 'status', 'author', 'created_at')
+    search_fields = ('question', 'created_at')
+    list_filter = ('question', 'status', 'created_at')
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Question, QuestionAdmin)

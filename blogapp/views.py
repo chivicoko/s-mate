@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PostForm, RegisterForm, CustomAuthenticationForm
+from .forms import PostForm, RegisterForm, CustomAuthenticationForm, QuestionForm
 from .models import Post
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
@@ -46,19 +46,42 @@ def home(request):
     return render(request, 'blogapp/home.html', {'posts': posts})
 
 @login_required
+@permission_required("blogapp.add_question", login_url="login", raise_exception=True)
 def teacher(request):
     posts = Post.objects.all()
     return render(request, 'blogapp/teacher.html', {'posts': posts})
 
 @login_required
-def teacher_add_question(request):
-    posts = Post.objects.all()
-    return render(request, 'blogapp/add_question.html', {'posts': posts})
+def new_question(request):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('success')
+        else:
+            messages.error(request, 'Failed to add question. Please correct the errors below.')
+    else:
+        form = PostForm()
+    return render(request, 'blogapp/add_question.html', {'form': form})
 
 @login_required
-def teacher_add_test(request):
-    posts = Post.objects.all()
-    return render(request, 'blogapp/add_test.html', {'posts': posts})
+# @permission_required("blogapp.add_question", login_url="login", raise_exception=True)
+def add_test(request):
+    # if request.method == 'POST':
+    #     form = QuestionForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         post = form.save(commit=False)
+    #         post.author = request.user
+    #         post.save()
+    #         return redirect('success')
+    #     else:
+    #         messages.error(request, 'Failed to add question. Please correct the errors below.')
+    # else:
+    #     form = PostForm()
+    # return render(request, 'blogapp/add_question.html', {'form': form})
+    pass
 
 @login_required
 def student(request):
