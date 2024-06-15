@@ -15,9 +15,9 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'status', 'author', 'created_at')
-    search_fields = ('question', 'created_at')
-    list_filter = ('question', 'status', 'created_at')
+    list_display = ('question_t', 'status', 'author', 'created_at')
+    search_fields = ('question_t', 'created_at')
+    list_filter = ('question_t', 'status', 'created_at')
 
 
 admin.site.register(Post, PostAdmin)

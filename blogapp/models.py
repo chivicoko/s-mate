@@ -5,9 +5,9 @@ from django.utils import timezone
 
 class Post(models.Model):
     class Status(models.TextChoices):
-        DRAFT = 'DR', ('Draft')
-        PUBLISHED = 'PB', ('Published')
-        ARCHIVED = 'AR', ('Archived')
+        DRAFT = 'Draft', ('Draft')
+        PUBLISHED = 'Published', ('Published')
+        ARCHIVED = 'Archived', ('Archived')
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
@@ -15,7 +15,7 @@ class Post(models.Model):
     thumbnail = models.ImageField(upload_to='thumbnails/', blank=True, null=True)
     intro = models.TextField()
     body = models.TextField()
-    status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT,)
+    status = models.CharField(max_length=100, choices=Status.choices, default=Status.DRAFT,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -38,14 +38,20 @@ class Profile(models.Model):
 
 class Question(models.Model):
     class Status(models.TextChoices):
-        DRAFT = 'DR', ('Draft')
-        PUBLISHED = 'PB', ('Published')
-        ARCHIVED = 'AR', ('Archived')
+        DRAFT = 'Draft', ('Draft')
+        PUBLISHED = 'Published', ('Published')
+        ARCHIVED = 'Archived', ('Archived')
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    question = models.TextField()
-    answer = models.TextField()
+    question_t = models.TextField()
+    answer_t = models.TextField()
     thumbnail = models.ImageField(upload_to='questions_thumbnails/', blank=True, null=True)
-    status = models.CharField(max_length=2,choices=Status.choices,default=Status.DRAFT,)
+    status = models.CharField(max_length=100,choices=Status.choices,default=Status.DRAFT,)
     created_at = models.DateTimeField(auto_now_add=True, )
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question_t
+    
+    class Meta:
+        ordering = ('-created_at',)

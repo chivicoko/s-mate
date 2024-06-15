@@ -40,14 +40,14 @@ class PostForm(forms.ModelForm):
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['question', 'answer', 'thumbnail', 'status']
+        fields = ['question_t', 'answer_t', 'thumbnail', 'status']
         widgets = {
-            'question': forms.Textarea(attrs={
+            'question_t': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
                 'placeholder': 'Enter a question'
             }),
-            'answer': forms.Textarea(attrs={
+            'answer_t': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
                 'placeholder': 'Enter the answer to the question'

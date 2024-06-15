@@ -67,7 +67,6 @@ def new_question(request):
     return render(request, 'blogapp/add_question.html', {'form': form})
 
 @login_required
-# @permission_required("blogapp.add_question", login_url="login", raise_exception=True)
 def add_test(request):
     # if request.method == 'POST':
     #     form = QuestionForm(request.POST, request.FILES)
@@ -84,17 +83,17 @@ def add_test(request):
     pass
 
 @login_required
-def student(request):
+def questions_tests(request):
     posts = Post.objects.all()
-    return render(request, 'blogapp/student.html', {'posts': posts})
+    return render(request, 'blogapp/questions_tests.html', {'posts': posts})
 
 @login_required
-def student_past_questions(request):
+def past_questions(request):
     posts = Post.objects.all()
     return render(request, 'blogapp/past_questions.html', {'posts': posts})
 
 @login_required
-def student_subjects(request):
+def subjects(request):
     posts = Post.objects.all()
     return render(request, 'blogapp/subjects.html', {'posts': posts})
 
@@ -114,13 +113,13 @@ def blog(request):
             user = User.objects.filter(id=user_id).first()
             if user and request.user.is_staff:
                 try:
-                    group = Group.objects.get(name='default')
+                    group = Group.objects.get(name='Default')
                     group.user_set.remove(user)
                 except:
                     pass
 
                 try:
-                    group = Group.objects.get(name='mod')
+                    group = Group.objects.get(name='Quasi Admin')
                     group.user_set.remove(user)
                 except:
                     pass

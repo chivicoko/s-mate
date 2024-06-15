@@ -28,11 +28,11 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#"><em>Hello <strong>{{user.username|capfirst}}</strong></em></a></li>
                             <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
+                            <li><a class="dropdown-item" href="{% url 'teacher' %}">Teacher</a></li>
+                            <li><a class="dropdown-item" href="{% url 'questions_tests' %}">Questions & Tests</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'teacher' %}">Teacher</a></li>
-                            <li><a class="dropdown-item" href="{% url 'student' %}">Student</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>
@@ -57,6 +57,7 @@
         <header class="bg-primary text-white text-center py-3">
             <h1>Welcome to SchoolMate</h1>
             <p class="lead">A great place to find amazing content</p>
+            * <a href="javascript:history.back()" class="text-white"> Back</a> *
         </header>
         {% endblock header %}
     </div>

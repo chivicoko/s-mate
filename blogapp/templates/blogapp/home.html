@@ -1,14 +1,130 @@
 {% extends "main.html" %}
 
+{% block header %}
+<header class="bg-primary text-white text-center py-3">
+    <h1>Welcome to SchoolMate</h1>
+    <p class="lead">A great place to find amazing content</p>
+    * <a href="javascript:history.back()" class="text-white"> Back</a> *
+    <a href="{% url 'teacher' %}" class="btn btn-dark px-4">Teacher</a>
+    <a href="{% url 'questions_tests' %}" class="btn btn-outline-dark px-4">Questions & Tests</a>
+</header>
+{% endblock header %}
+
 {% block content %}
 
-    <div class="row">
-        <div class="col text-center">
-            <h3>This is the home page</h3>
-            
-            <a href="{% url 'teacher' %}" class="btn btn-primary px-4">Teacher</a>
-            <a href="{% url 'student' %}" class="btn btn-outline-primary px-4">Student</a>
+<div class="row my-5">
+    <div class="col">
+        <h3>The blog</h3>
+        <hr>
+        <div class="row">
+            {% for post in posts|slice:":5" %}
+                {% if post.status == 'Published' %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            {% if post.thumbnail %}
+                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
+                                <p class="card-text">{{ post.body|truncatewords:8 }}</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
+                                    </div>
+                                    <div class="col">
+                                        <p><small>{{ post.created_at|date:"D d M Y" }} {{ post.created_at|time:"h:i" }}</small></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between">
+                                    {% if user == post.author or perms.blogapp.delete_post %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                    {% if user.is_staff %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+
+                <h1>No posts yet <em>!</em> </h1>
+
+            {% endfor %}
         </div>
+        
+        <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a>
+
+    </div>     
+</div>
+
+<div class="row my-5">
+    <div class="col">
+        <h3>Questions</h3>
+        <hr>
+        <div class="row">
+            {% for post in posts|slice:":5" %}
+                {% if post.status == 'Published' %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            {% if post.thumbnail %}
+                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
+                                <p class="card-text">{{ post.body|truncatewords:8 }}</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
+                                    </div>
+                                    <div class="col">
+                                        <p><small>{{ post.created_at|date:"D d M Y" }} {{ post.created_at|time:"h:i" }}</small></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between">
+                                    {% if user == post.author or perms.blogapp.delete_post %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                    {% if user.is_staff %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+
+                <h1>No posts yet <em>!</em> </h1>
+
+            {% endfor %}
+        </div>
+        
+        <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a>
+
     </div>
+</div>
+
     
 {% endblock %}

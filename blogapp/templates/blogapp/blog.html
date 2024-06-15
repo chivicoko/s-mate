@@ -23,11 +23,11 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#"><em>Hello <strong>{{user.username|capfirst}}</strong></em></a></li>
                             <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
+                            <li><a class="dropdown-item" href="{% url 'teacher' %}">Teacher</a></li>
+                            <li><a class="dropdown-item" href="{% url 'questions_tests' %}">Questions & Tests</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'teacher' %}">Teacher</a></li>
-                            <li><a class="dropdown-item" href="{% url 'student' %}">Student</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>
@@ -60,47 +60,48 @@
         <div class="col-md-8">
             <div class="row">
                 {% for post in posts %}
-                    <div class="col-md-6">
-                        <div class="card mb-4">
-                            {% if post.thumbnail %}
-                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
-                                <p class="card-text">{{ post.body }}</p>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
-                                    </div>
-                                    <div class="col">
-                                        <p><small>{{ post.created_at }}</small></p>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-between">
-                                    {% if user == post.author or perms.blogapp.delete_post %}
-                                        <div class="col-4">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
-                                            </form>
+                    {% if post.status == 'Published' %}
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                {% if post.thumbnail %}
+                                    <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
+                                    <p class="card-text">{{ post.body|truncatewords:8 }}</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="{% url 'post_detail' post.slug %}">Read More</a>
                                         </div>
-                                    {% endif %}
-                                    {% if user.is_staff %}
-                                        <div class="col-4">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
-                                            </form>
+                                        <div class="col">
+                                            <p><small>{{ post.created_at|date:"D d M Y" }} {{ post.created_at|time:"h:i" }}</small></p>
                                         </div>
-                                    {% endif %}
+                                    </div>
+                                    <div class="row justify-content-between">
+                                        {% if user == post.author or perms.blogapp.delete_post %}
+                                            <div class="col-4">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                        {% if user.is_staff %}
+                                            <div class="col-4">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    {% endif %}
                 {% empty %}
 
-                    <p>No posts yet <em>!</em> </p>
+                    <h1>No posts yet <em>!</em> </h1>
 
                 {% endfor %}
             </div>

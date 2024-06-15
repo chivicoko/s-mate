@@ -8,6 +8,7 @@
     <header class="bg-primary text-white text-center py-3">
         <h1>Add Question</h1>
         <p class="lead">Here you can add all your questions, and choose to publish immediately or not.</p>
+        * <a href="javascript:history.back()" class="text-white"> Back</a> *
     </header>
 {% endblock header %}
 
@@ -19,12 +20,12 @@
                 {% csrf_token %}
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        {{ form.question.label_tag }}
-                        {{ form.question }}
+                        {{ form.question_t.label_tag }}
+                        {{ form.question_t }}
                     </div>
                     <div class="col-md-6">
-                        {{ form.answer.label_tag }}
-                        {{ form.answer }}
+                        {{ form.answer_t.label_tag }}
+                        {{ form.answer_t }}
                     </div>
                 </div>
                 <div class="row mb-3">
