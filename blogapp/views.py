@@ -107,7 +107,7 @@ def blog(request):
 
 @login_required
 @permission_required("blogapp.add_post", login_url="login", raise_exception=True)
-def post_blog(request):
+def new_blog_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
