@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm, RegisterForm, CustomAuthenticationForm, QuestionForm
-from .models import Post
+from .models import Post, Question
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
@@ -43,7 +43,8 @@ def logout_view(request):
 
 def home(request):
     posts = Post.objects.all()
-    return render(request, 'blogapp/home.html', {'posts': posts})
+    questions = Question.objects.all()
+    return render(request, 'blogapp/home.html', {'posts': posts, 'questions':questions})
 
 @login_required
 @permission_required("blogapp.add_question", login_url="login", raise_exception=True)
@@ -89,8 +90,8 @@ def questions_tests(request):
 
 @login_required
 def past_questions(request):
-    posts = Post.objects.all()
-    return render(request, 'blogapp/past_questions.html', {'posts': posts})
+    questions = Question.objects.all()
+    return render(request, 'blogapp/past_questions.html', {'questions': questions})
 
 @login_required
 def subjects(request):

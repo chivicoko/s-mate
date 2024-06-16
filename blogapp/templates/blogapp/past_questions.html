@@ -1,14 +1,62 @@
 {% extends "main.html" %}
 
-{% block title %}SchoolMate - Your Educational Friend.{% endblock %}
+{% block title %}SchoolMate | Past Questions{% endblock %}
+
+{% block header %}
+<header class="bg-primary text-white text-center py-3">
+    <h1>Past Questions</h1>
+    <p class="lead">This is the Past Questions' page</p>
+    * <a href="javascript:history.back()" class="text-white"> Back</a> *
+    <a href="{% url 'subjects' %}" class="btn btn-dark px-4">Subjects</a>
+</header>
+{% endblock header %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="col text-center">
-            <h3>This is the Past Questions' page</h3>
-            <a href="{% url 'subjects' %}" class="btn btn-outline-primary px-4">Subjects</a>
+<div class="row my-5">
+    <div class="col">
+        <h3>Questions</h3>
+        <hr>
+        <div class="row">
+            {% for question in questions|slice:":5" %}
+                {% if question.status == 'Published' %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            {% if question.thumbnail %}
+                                <img src="{{ question.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ question.question_t|truncatewords:4 }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ question.question_t }} <small class="h6">(by <em>{{ question.author }}</em>)</small></h5>
+                                <p class="card-text">{{ question.answer_t|truncatewords:8 }}</p>
+                                <div class="row justify-content-between">
+                                    {% if user == question.author or perms.blogapp.delete_question %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                    {% if user.is_staff %}
+                                        <div class="col-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+
+                <h1>No questions yet <em>!</em> </h1>
+
+            {% endfor %}
         </div>
     </div>
-    
+</div>
+
 {% endblock %}

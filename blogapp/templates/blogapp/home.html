@@ -74,30 +74,22 @@
         <h3>Questions</h3>
         <hr>
         <div class="row">
-            {% for post in posts|slice:":5" %}
-                {% if post.status == 'Published' %}
+            {% for question in questions|slice:":5" %}
+                {% if question.status == 'Published' %}
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            {% if post.thumbnail %}
-                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                            {% if question.thumbnail %}
+                                <img src="{{ question.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ question.question_t|truncatewords:4 }}">
                             {% endif %}
                             <div class="card-body">
-                                <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
-                                <p class="card-text">{{ post.body|truncatewords:8 }}</p>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
-                                    </div>
-                                    <div class="col">
-                                        <p><small>{{ post.created_at|date:"D d M Y" }} {{ post.created_at|time:"h:i" }}</small></p>
-                                    </div>
-                                </div>
+                                <h5 class="card-title">{{ question.question_t }} <small class="h6">(by <em>{{ question.author }}</em>)</small></h5>
+                                <p class="card-text">{{ question.answer_t|truncatewords:8 }}</p>
                                 <div class="row justify-content-between">
-                                    {% if user == post.author or perms.blogapp.delete_post %}
+                                    {% if user == question.author or perms.blogapp.delete_question %}
                                         <div class="col-4">
                                             <form method="post">
                                                 {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
+                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete</button>
                                             </form>
                                         </div>
                                     {% endif %}
@@ -116,12 +108,13 @@
                 {% endif %}
             {% empty %}
 
-                <h1>No posts yet <em>!</em> </h1>
+                <h1>No questions yet <em>!</em> </h1>
 
             {% endfor %}
         </div>
         
-        <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a>
+        <a href="javascript:void()" class="btn btn-primary px-4">See More</a>
+        <!-- <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a> -->
 
     </div>
 </div>
