@@ -57,6 +57,21 @@ def new_question(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
         if form.is_valid():
+            question = form.save(commit=False)
+            question.author = request.user
+            question.save()
+            return redirect('success')
+        else:
+            messages.error(request, 'Failed to add question. Please correct the errors below.')
+    else:
+        form = QuestionForm()
+    return render(request, 'blogapp/add_question.html', {'form': form})
+
+@login_required
+def add_test(request):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES)
+        if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
@@ -65,22 +80,7 @@ def new_question(request):
             messages.error(request, 'Failed to add question. Please correct the errors below.')
     else:
         form = PostForm()
-    return render(request, 'blogapp/add_question.html', {'form': form})
-
-@login_required
-def add_test(request):
-    # if request.method == 'POST':
-    #     form = QuestionForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         post = form.save(commit=False)
-    #         post.author = request.user
-    #         post.save()
-    #         return redirect('success')
-    #     else:
-    #         messages.error(request, 'Failed to add question. Please correct the errors below.')
-    # else:
-    #     form = PostForm()
-    # return render(request, 'blogapp/add_question.html', {'form': form})
+    return render(request, 'blogapp/add_test.html', {'form': form})
     pass
 
 @login_required

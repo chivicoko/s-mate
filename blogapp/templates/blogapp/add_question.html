@@ -16,40 +16,40 @@
 
 <div class="container">
     <div class="row py-4 justify-content-center"> 
-            <div class="col-md-10">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            {{ form.question_t.label_tag }}
-                            {{ form.question_t }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.answer_t.label_tag }}
-                            {{ form.answer_t }}
-                        </div>
+        <div class="col-md-10">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.question_t.label_tag }}
+                        {{ form.question_t }}
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            {{ form.thumbnail.label_tag }}
-                            {{ form.thumbnail }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.status.label_tag }}
-                            {{ form.status }}
-                        </div>
+                    <div class="col-md-6">
+                        {{ form.answer_t.label_tag }}
+                        {{ form.answer_t }}
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary mt-3 form-control">Submit</button>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="{% url 'add_test' %}" class="btn btn-outline-primary px-4 mt-3 form-control">Add Test</a>
-                        </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.thumbnail.label_tag }}
+                        {{ form.thumbnail }}
                     </div>
-                </form>
-                <a href="{% url 'home' %}" class="btn btn-secondary mt-3 form-control">Home</a>
-            </div>
+                    <div class="col-md-6">
+                        {{ form.status.label_tag }}
+                        {{ form.status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary mt-3 form-control">Submit</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'add_test' %}" class="btn btn-outline-primary px-4 mt-3 form-control">Add Test</a>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'home' %}" class="btn btn-secondary mt-3 form-control">Home</a>
+        </div>
     </div>
 </div>
     

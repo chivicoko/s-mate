@@ -37,30 +37,6 @@ class PostForm(forms.ModelForm):
         }
 
 
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Question
-        fields = ['question_t', 'answer_t', 'thumbnail', 'status']
-        widgets = {
-            'question_t': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 3,
-                'placeholder': 'Enter a question'
-            }),
-            'answer_t': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 3,
-                'placeholder': 'Enter the answer to the question'
-            }),
-            'thumbnail': forms.ClearableFileInput(attrs={
-                'class': 'form-control-file'
-            }),
-            'status': forms.Select(attrs={
-                'class': 'form-control'
-            }),
-        }
-
-
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(
         required=True,
@@ -107,3 +83,27 @@ class CustomAuthenticationForm(AuthenticationForm):
         'class': 'form-control',
         'placeholder': 'Enter your password'
     }))
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['question_t', 'answer_t', 'thumbnail', 'status']
+        widgets = {
+            'question_t': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter a question'
+            }),
+            'answer_t': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter the answer to the question'
+            }),
+            'thumbnail': forms.ClearableFileInput(attrs={
+                'class': 'form-control-file'
+            }),
+            'status': forms.Select(attrs={
+                'class': 'form-control'
+            })
+        }

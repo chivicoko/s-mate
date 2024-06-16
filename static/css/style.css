@@ -16,7 +16,7 @@
 .main-wrap {
     min-height: 55vh;
 }
-.profile-wrap {
+/* .profile-wrap {
     display: flex;
     gap: 30px;
 }
@@ -32,7 +32,7 @@
 .profile-card p {
     font-size: small;
     text-align: center;
-}
+} */
 header {
     -webkit-clip-path: polygon(0 0, 100% 0%, 95% 100%, 5% 100%);
     clip-path: polygon(0 0, 100% 0%, 95% 100%, 5% 100%);
