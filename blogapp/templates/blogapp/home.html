@@ -1,123 +1,168 @@
 {% extends "main.html" %}
+{% load static %}
 
 {% block header %}
-<header class="bg-primary text-white text-center py-3">
-    <h1>Welcome to SchoolMate</h1>
-    <p class="lead">A great place to find amazing content</p>
-    * <a href="javascript:history.back()" class="text-white"> Back</a> *
-    <a href="{% url 'teacher' %}" class="btn btn-dark px-4">Teacher</a>
-    <a href="{% url 'questions_tests' %}" class="btn btn-outline-dark px-4">Questions & Tests</a>
-</header>
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block img-fluid" src="{% static 'images/book_shelf.jpg' %}" alt="First slide - book_shelf">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>First slide label</h1>
+          <h4>Some representative placeholder content for the first slide.</h4>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block img-fluid" src="{% static 'images/students_group.jpg' %}" alt="Second slide - students_group">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Second slide label</h5>
+          <h4>Some representative placeholder content for the second slide.</h4>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block img-fluid" src="{% static 'images/study.jpg' %}" alt="Third slide - study">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Third slide label</h1>
+          <h4>Some representative placeholder content for the third slide.</h3>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
 {% endblock header %}
 
 {% block content %}
 
-<div class="row my-5">
-    <div class="col">
-        <h3>The blog</h3>
-        <hr>
-        <div class="row">
-            {% for post in posts|slice:":5" %}
-                {% if post.status == 'Published' %}
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            {% if post.thumbnail %}
-                                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
-                                <p class="card-text">{{ post.body|truncatewords:8 }}</p>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="{% url 'post_detail' post.slug %}">Read More</a>
-                                    </div>
-                                    <div class="col">
-                                        <p><small>{{ post.created_at|date:"D d M Y" }} {{ post.created_at|time:"h:i" }}</small></p>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-between">
-                                    {% if user == post.author or perms.blogapp.delete_post %}
-                                        <div class="col-4">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
-                                            </form>
+<div class="container">
+    <div class="row my-5">
+        <div class="col">
+            <h3>The blog</h3>
+            <hr>
+            <div class="row">
+                {% for post in posts|slice:":5" %}
+                    {% if post.status == 'Published' %}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                {% if post.thumbnail %}
+                                    <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ post.title }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ post.title }} <small class="h6">(by <em>{{ post.author }}</em>)</small></h5>
+                                    <p class="card-text">{{ post.body|truncatewords:8 }}</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="{% url 'post_detail' post.slug %}">Read More</a>
                                         </div>
-                                    {% endif %}
-                                    {% if user.is_staff %}
-                                        <div class="col-4">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
-                                            </form>
+                                        <div class="col">
+                                            <p><small>{{ post.created_at|date:"D d M Y" }} {{ post.created_at|time:"h:i" }}</small></p>
                                         </div>
-                                    {% endif %}
+                                    </div>
+                                    <div class="row justify-content-between">
+                                        {% if user == post.author or perms.blogapp.delete_post %}
+                                            <div class="col-4">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete Post</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                        {% if user.is_staff %}
+                                            <div class="col-4">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-            {% empty %}
-
-                <h1>No posts yet <em>!</em> </h1>
-
-            {% endfor %}
-        </div>
-        
-        <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a>
-
-    </div>     
-</div>
-
-<div class="row my-5">
-    <div class="col">
-        <h3>Questions</h3>
-        <hr>
-        <div class="row">
-            {% for question in questions|slice:":5" %}
-                {% if question.status == 'Published' %}
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            {% if question.thumbnail %}
-                                <img src="{{ question.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ question.question_t|truncatewords:4 }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ question.question_t }} <small class="h6">(by <em>{{ question.author }}</em>)</small></h5>
-                                <p class="card-text">{{ question.answer_t|truncatewords:8 }}</p>
-                                <div class="row justify-content-between">
-                                    {% if user == question.author or perms.blogapp.delete_question %}
-                                        <div class="col-4">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete</button>
-                                            </form>
-                                        </div>
-                                    {% endif %}
-                                    {% if user.is_staff %}
-                                        <div class="col-4">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
-                                            </form>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% empty %}
-
-                <h1>No questions yet <em>!</em> </h1>
-
-            {% endfor %}
-        </div>
-        
-        <a href="javascript:void()" class="btn btn-primary px-4">See More</a>
-        <!-- <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a> -->
-
+                    {% endif %}
+                {% empty %}
+    
+                    <h1>No posts yet <em>!</em> </h1>
+    
+                {% endfor %}
+            </div>
+            
+            <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a>
+    
+        </div>     
     </div>
 </div>
 
+<div class="container-fluid overflow-hidden">
+    <div class="row bg-fixed">
+        <div class="col">
     
-{% endblock %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col">
+            <h3>Questions</h3>
+            <hr>
+            <div class="row">
+                {% for question in questions|slice:":5" %}
+                    {% if question.status == 'Published' %}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                {% if question.thumbnail %}
+                                    <img src="{{ question.thumbnail.url }}" class="card-img-top" alt="Thumbnail for {{ question.question_t|truncatewords:4 }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ question.question_t }} <small class="h6">(by <em>{{ question.author }}</em>)</small></h5>
+                                    <p class="card-text">{{ question.answer_t|truncatewords:8 }}</p>
+                                    <div class="row justify-content-between">
+                                        {% if user == question.author or perms.blogapp.delete_question %}
+                                            <div class="col-4">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id }}">Delete</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                        {% if user.is_staff %}
+                                            <div class="col-4">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-warning" name="user-id" value="{{ post.author.id }}">Ban User</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+    
+                    <h1>No questions yet <em>!</em> </h1>
+    
+                {% endfor %}
+            </div>
+            
+            <a href="javascript:void()" class="btn btn-primary px-4">See More</a>
+            <!-- <a href="{% url 'blog' %}" class="btn btn-primary px-4">See More</a> -->
+    
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

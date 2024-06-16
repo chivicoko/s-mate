@@ -13,45 +13,47 @@
 
 {% block content %}
 
-<div class="row py-4 justify-content-center"> 
-        <div class="col-md-10">
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form.title.label_tag }}
-                        {{ form.title }}
+<div class="container">
+    <div class="row py-4 justify-content-center"> 
+            <div class="col-md-10">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.title.label_tag }}
+                            {{ form.title }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.slug.label_tag }}
+                            {{ form.slug }}
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        {{ form.slug.label_tag }}
-                        {{ form.slug }}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.intro.label_tag }}
+                            {{ form.intro }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.thumbnail.label_tag }}
+                            {{ form.thumbnail }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form.status.label_tag }}
+                            {{ form.status }}
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form.intro.label_tag }}
-                        {{ form.intro }}
+                    <div class="row">
+                        <div class="col">
+                            {{ form.body.label_tag }}
+                            {{ form.body }}
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        {{ form.thumbnail.label_tag }}
-                        {{ form.thumbnail }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ form.status.label_tag }}
-                        {{ form.status }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {{ form.body.label_tag }}
-                        {{ form.body }}
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3 form-control">Submit</button>
-            </form>
-            <a href="javascript:history.back()" class="btn btn-secondary mt-3 form-control">Back</a>
-        </div>
+                    <button type="submit" class="btn btn-primary mt-3 form-control">Submit</button>
+                </form>
+                <a href="javascript:history.back()" class="btn btn-secondary mt-3 form-control">Back</a>
+            </div>
     </div>
+</div>
 
     
 {% endblock %}

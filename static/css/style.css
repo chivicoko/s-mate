@@ -1,7 +1,21 @@
+
+#carouselExampleCaptions .carousel-item {
+    height: 75vh;
+    min-height: 300px;
+    background: no-repeat center center/center scroll !important;
+    background-size: cover !important;
+}
+/* #carouselExampleCaptions .carousel-item img {
+    height: 100%;
+} */
+.carousel-caption {
+    bottom: 50%;
+    transform: translateY(50%);
+    text-align: left;
+}
 .main-wrap {
     min-height: 55vh;
 }
-
 .profile-wrap {
     display: flex;
     gap: 30px;
@@ -22,4 +36,62 @@
 header {
     -webkit-clip-path: polygon(0 0, 100% 0%, 95% 100%, 5% 100%);
     clip-path: polygon(0 0, 100% 0%, 95% 100%, 5% 100%);
+}
+
+/* ------------- */
+
+.entrance-payment-bg {
+    background: url(../images/nursing-school-images/78.jpg) center center/cover no-repeat fixed padding-box border-box #ccc;
+    box-shadow: inset 0 0 0 2000px rgba(23, 41, 0, 0.762);
+}
+
+.bg-fixed {
+    background: url("{% static 'images/study.jpg' %}") center center/cover no-repeat fixed padding-box border-box #ccc;
+    width: 100vw;
+    height: 50vh;
+    box-shadow: inset 0 0 0 2000px rgba(10, 17, 0, 0.835);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-fixed img {
+    animation: rotate-ict infinite 30s linear;
+    -webkit-animation: rotate-ict infinite 30s linear;
+    -moz-animation: rotate-ict infinite 30s linear;
+    -o-animation: rotate-ict infinite 30s linear;
+    -ms-animation: rotate-ict infinite 30s linear;
+}
+
+@keyframes rotate-ict {
+    100% { transform: rotate(360deg); }
+}
+
+@-moz-keyframes rotate-ict { 
+    100% { -moz-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes rotate-ict { 
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@-o-keyframes rotate-ict { 
+    100% { -o-transform: rotate(360deg); }
+}
+
+@-ms-keyframes rotate-ict { 
+    100% { -ms-transform: rotate(360deg); }
+}
+
+.drop a {
+    color: #000 !important;
+    font-size: 13px !important;
+}
+
+.drop a:hover {
+    color: #ab0a17 !important;
+}
+
+.drop:hover {
+    background: rgba(0, 128, 0, 0.357) !important;
 }
