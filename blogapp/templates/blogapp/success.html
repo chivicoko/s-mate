@@ -8,23 +8,19 @@
 {% block content %}
 
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5">
         <div class="col-md-10">
             <h1 class="text-center">Successfully Uploaded / Posted!!!</h1>
             <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsam explicabo accusamus recusandae praesentium aperiam?</p>
 
-            <div class="row">
-                <div class="col">
-                </div>
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col d-flex justify-content-center g-4 gap-4">
                     <a href="{% url 'blog' %}" class="btn btn-primary px-4 my-3">Blog</a>
                     <a href="{% url 'new_blog_post' %}" class="btn btn-outline-primary px-4 my-3">New Post</a>
                     {% if user|has_perm:"blogapp.add_question" %}
-                    <a href="{% url 'new_question' %}" class="btn btn-outline-secondary px-4 my-3">New Question</a>
+                    <a href="{% url 'new_question' %}" class="btn btn-secondary px-4 my-3">New Question</a>
                     {% endif %}
-                    <a href="{% url 'home' %}" class="btn btn-secondary px-4 my-3">Back</a>
-                </div>
-                <div class="col">
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary px-4 my-3">Back</a>
                 </div>
             </div>
         </div>
