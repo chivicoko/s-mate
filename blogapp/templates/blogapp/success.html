@@ -1,7 +1,9 @@
 
 {% extends "main.html" %}
 
-{% block title %}{{ post.title }} - TheBlog{% endblock %}
+{% load permissions %}
+
+{% block title %}SchoolMate - Success{% endblock %}
 
 {% block content %}
 
@@ -17,6 +19,9 @@
                 <div class="col">
                     <a href="{% url 'blog' %}" class="btn btn-primary px-4 my-3">Blog</a>
                     <a href="{% url 'new_blog_post' %}" class="btn btn-outline-primary px-4 my-3">New Post</a>
+                    {% if user|has_perm:"blogapp.add_question" %}
+                    <a href="{% url 'new_question' %}" class="btn btn-outline-secondary px-4 my-3">New Question</a>
+                    {% endif %}
                     <a href="{% url 'home' %}" class="btn btn-secondary px-4 my-3">Back</a>
                 </div>
                 <div class="col">

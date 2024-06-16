@@ -85,8 +85,7 @@ def add_test(request):
 
 @login_required
 def questions_tests(request):
-    posts = Post.objects.all()
-    return render(request, 'blogapp/questions_tests.html', {'posts': posts})
+    return render(request, 'blogapp/questions_tests.html')
 
 @login_required
 def past_questions(request):
@@ -151,4 +150,5 @@ def post_detail(request, slug):
 
 @login_required
 def success(request):
-    return render(request, 'blogapp/success.html')
+    questions = Question.objects.all()
+    return render(request, 'blogapp/success.html', {'questions': questions})
