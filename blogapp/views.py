@@ -151,4 +151,4 @@ def post_detail(request, slug):
 @login_required
 def success(request):
     questions = Question.objects.all()
-    return render(request, 'blogapp/success.html', {'questions': questions})
+    return render(request, 'blogapp/success.html')
