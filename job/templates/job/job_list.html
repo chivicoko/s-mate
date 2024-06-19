@@ -10,7 +10,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ job.title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ job.location.display_name }}</h6>
-                    <p class="card-text">{{ job.description|safe }}</p>
+                    <!-- <p class="card-text">{{ job.description|safe }}</p> -->
+                    <p class="card-text">{{ job.description|safe|truncatewords:40 }}</p>
                     <div class="row">
                         <div class="col">
                             <p>Salary range: {{ job.salary_min }} - {{ job.salary_max }}</p>

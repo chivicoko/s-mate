@@ -49,6 +49,46 @@
 <div class="container">
     <div class="row my-5">
         <div class="col">
+            <h3>Real Time Job Listings</h3>
+            <hr>
+            <div class="row">
+                {% for job in jobs.results|slice:":4" %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ job.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ job.location.display_name }} - ({{ job.created }})</h6>
+                            <p class="card-text">{{ job.description|safe|truncatewords:20 }}</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p>Salary range: {{ job.salary_min }} - {{ job.salary_max }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>Duration: {{ job.contract_time }} ({{ job.contract_type }})</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="{{ job.redirect_url }}" target="_blank" class="btn btn-outline-success">Proceed</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <h1>We were not able to fetch jobs at this time <em>!</em> </h1>
+                {% endfor %}
+            </div>
+            
+            <a href="{% url 'job_list' %}" class="btn btn-primary px-4">See More</a>
+    
+        </div>     
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col">
             <h3>The blog</h3>
             <hr>
             <div class="row">

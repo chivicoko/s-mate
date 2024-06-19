@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import home, teacher, new_question, add_test, questions_tests, past_questions, subjects, blog, post_detail, success, new_blog_post, register_view, login_view, logout_view
+from .views import home, fetch_jobs_view, teacher, new_question, add_test, questions_tests, past_questions, subjects, blog, post_detail, success, new_blog_post, register_view, login_view, logout_view
 
 urlpatterns = [
     path('', home, name='home'),
     path('home/', home, name='home'),
+    path('fetch-jobs/', fetch_jobs_view, name='fetch_jobs_view'),
     path('teacher/', teacher, name='teacher'),
     path('teacher/new_question/', new_question, name='new_question'),
     path('teacher/add_test/', add_test, name='add_test'),
