@@ -11,42 +11,86 @@
                     <h5 class="card-title">{{ job.title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ job.location.display_name }}</h6>
                     <p class="card-text">{{ job.description|safe }}</p>
+                    <div class="row">
+                        <div class="col">
+                            <p>Salary range: {{ job.salary_min }} - {{ job.salary_max }}</p>
+                        </div>
+                        <div class="col">
+                            <p>Duration: {{ job.contract_time }} ({{ job.contract_type }})</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{ job.redirect_url }}" target="_blank" class="btn btn-outline-success">Proceed</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
     <div class="text-center mt-4">
-        <button id="refresh-jobs" class="btn btn-primary">Refresh Jobs</button>
+        <!-- <button id="refresh-jobs" class="btn btn-primary">Refresh Jobs</button> -->
+        <a href="{% url 'job_list' %}" id="" class="btn btn-primary">Refresh Jobs</a>
     </div>
 </div>
 {% endblock %}
 
+
+<!-- 
+{% block scripts %}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('refresh-jobs').addEventListener('click', fetchJobs);
-
-    function fetchJobs() {
+    // Function to fetch jobs from the server
+    const fetchJobs = () => {
         fetch('{% url "fetch_jobs_view" %}')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 const jobContainer = document.getElementById('job-container');
                 jobContainer.innerHTML = '';
                 data.results.forEach(job => {
-                    jobContainer.innerHTML += `
+                    const jobCard = `
                         <div class="col-md-6 mb-4">
                             <div class="card h-100">
                                 <div class="card-body">
                                     <h5 class="card-title">${job.title}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">${job.location.display_name}</h6>
                                     <p class="card-text">${job.description}</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Salary range: ${job.salary_min} - ${job.salary_max}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>Duration: ${job.contract_time} (${job.contract_type})</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="${job.redirect_url}" target="_blank" class="btn btn-outline-success">Proceed</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     `;
+                    jobContainer.innerHTML += jobCard;
                 });
             })
-            .catch(error => console.error('Error fetching jobs:', error));
+            .catch(error => {
+                console.error('Error fetching jobs:', error);
+            });
+    };
+
+    // Add event listener to the refresh button
+    const refreshJobsButton = document.getElementById('refresh-jobs');
+    if (refreshJobsButton) {
+        refreshJobsButton.addEventListener('click', fetchJobs);
     }
 });
 </script>
+{% endblock %} -->
