@@ -11,11 +11,9 @@ def fetch_jobs():
         'results_per_page': 20,
         'what': 'python-django developer',
         'what_exclude': 'java',
-        'where': 'london',
+        'where': 'Remote',
         'sort_by': 'salary',
         'salary_min': 5000,
-        'full_time': 1,
-        'permanent': 1,
         'content-type': 'application/json'
     }
     response = requests.get(url, params=params)
