@@ -46,35 +46,35 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-
-# --------------------
-def fetch_jobs():
-    url = "http://api.adzuna.com:80/v1/api/jobs/gb/search/1"
-    params = {
-        'app_id': settings.ADZUNA_APP_ID,
-        'app_key': settings.ADZUNA_APP_KEY,
-        'results_per_page': 20,
-        'what': 'python-django developer',
-        'what_exclude': 'java',
-        'where': 'london',
-        'sort_by': 'salary',
-        'salary_min': 5000,
-        'full_time': 1,
-        'permanent': 1,
-        'content-type': 'application/json'
-    }
-    response = requests.get(url, params=params)
-    return response.json()
+def fetch_jobs(request):
+    try:
+        url = "http://api.adzuna.com:80/v1/api/jobs/gb/search/1"
+        params = {
+            'app_id': settings.ADZUNA_APP_ID,
+            'app_key': settings.ADZUNA_APP_KEY,
+            'results_per_page': 20,
+            'what': 'python-django developer',
+            'what_exclude': 'java',
+            'where': 'london',
+            'sort_by': 'salary',
+            'salary_min': 5000,
+            'full_time': 1,
+            'permanent': 1,
+            'content-type': 'application/json'
+        }
+        response = requests.get(url, params=params)
+        return response.json()
+    except:
+        messages.error(request, 'Failed to fetch jobs. Please check your internet connection.')
 
 def fetch_jobs_view(request):
-    jobs = fetch_jobs()
+    jobs = fetch_jobs(request)
     return JsonResponse(jobs)
-
 
 def home(request):
     posts = Post.objects.all()
     questions = Question.objects.all()
-    jobs = fetch_jobs()
+    jobs = fetch_jobs(request)
     return render(request, 'blogapp/home.html', {'posts': posts, 'questions':questions, 'jobs':jobs})
 
 @login_required
@@ -112,7 +112,6 @@ def add_test(request):
     else:
         form = PostForm()
     return render(request, 'blogapp/add_test.html', {'form': form})
-    pass
 
 @login_required
 def questions_tests(request):

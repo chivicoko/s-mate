@@ -3,21 +3,21 @@ from .models import Post, Profile, Question
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'avatar')
-    search_fields = ('user',)
-    list_filter = ('user',)
+    list_display = ('id', 'user', 'avatar')
+    search_fields = ('id', 'user',)
+    list_filter = ('id', 'user',)
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'author', 'created_at')
-    search_fields = ('title', 'created_at')
-    list_filter = ('title', 'status', 'created_at')
+    list_display = ('id', 'title', 'status', 'author', 'created_at')
+    search_fields = ('id', 'title', 'created_at')
+    list_filter = ('id', 'title', 'status', 'created_at')
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question_t', 'status', 'author', 'created_at')
-    search_fields = ('question_t', 'created_at')
-    list_filter = ('question_t', 'status', 'created_at')
+    list_display = ('id', 'question_t', 'status', 'author', 'created_at')
+    search_fields = ('id', 'question_t', 'created_at')
+    list_filter = ('id', 'question_t', 'status', 'created_at')
 
 
 admin.site.register(Post, PostAdmin)

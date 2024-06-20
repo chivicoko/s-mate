@@ -13,22 +13,22 @@
       <div class="carousel-item active">
         <img class="d-block img-fluid" src="{% static 'images/book_shelf.jpg' %}" alt="First slide - book_shelf">
         <div class="carousel-caption d-none d-md-block">
-          <h1>First slide label</h1>
-          <h4>Some representative placeholder content for the first slide.</h4>
+          <h1>Tech Job Postings - Python</h1>
+          <h4>Get the most current Software Job postings.</h4>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block img-fluid" src="{% static 'images/students_group.jpg' %}" alt="Second slide - students_group">
         <div class="carousel-caption d-none d-md-block">
-          <h1>Second slide label</h5>
-          <h4>Some representative placeholder content for the second slide.</h4>
+          <h1>Blog</h5>
+          <h4>Get the latest gists / gossips swiftly.</h4>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block img-fluid" src="{% static 'images/study.jpg' %}" alt="Third slide - study">
         <div class="carousel-caption d-none d-md-block">
-          <h1>Third slide label</h1>
-          <h4>Some representative placeholder content for the third slide.</h3>
+          <h1>Past Questions</h1>
+          <h4>All the past questions that you need to scale you SSCE examinations.</h3>
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@
             <h3>The blog</h3>
             <hr>
             <div class="row">
-                {% for post in posts|slice:":5" %}
+                {% for post in posts|slice:":6" %}
                     {% if post.status == 'Published' %}
                         <div class="col-md-4">
                             <div class="card mb-4">

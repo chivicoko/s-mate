@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+import uuid
 
 
 class Post(models.Model):
@@ -9,6 +10,7 @@ class Post(models.Model):
         PUBLISHED = 'Published', ('Published')
         ARCHIVED = 'Archived', ('Archived')
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -24,6 +26,7 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='avatars/', default='avatars/default_avatar.png', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, )
@@ -42,6 +45,7 @@ class Question(models.Model):
         PUBLISHED = 'Published', ('Published')
         ARCHIVED = 'Archived', ('Archived')
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     question_t = models.TextField()
     answer_t = models.TextField()
